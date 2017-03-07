@@ -63,17 +63,6 @@ class OpenStackExtractor(base.BaseExtractor):
             else:
                 b_name = b_value = None
 
-#        if not all([b_name, b_value]):
-#            if any([b_name, b_value]):
-#                LOG.warning("Benchmark for flavor %s not properly set" %
-#                            flavor)
-#            else:
-#                LOG.debug("Benchmark information for flavor %s not set,"
-#                          "plase indicate the corret benchmark_name_key "
-#                          "and benchmark_value_key in the configuration "
-#                          "file or set the correct properties in the "
-#                          "flavor." % flavor)
-
         LOG.debug("Benchmark information bench_type = %s , bench_value = %d"
                   % (b_name, b_value))
         return b_name, b_value
