@@ -120,7 +120,10 @@ class OpenStackExtractor(base.BaseExtractor):
                         image_id = image.get("vmcatcher_event_ad_mpuri", None)
 
             user_name = users[server.user_id]
-            LOG.debug(user_name)
+            ifaces = server.interface_list()
+            secgroups = server.list_security_group()
+            LOG.debug('>>>> Interfaces: ', ifaces)
+            LOG.debug('>>>> Sec Groups: ', secgroups)
             (b_name, b_value) = self._get_bench(nova, server)
             r = record.CloudRecord(server.id,
                                    CONF.site_name,
