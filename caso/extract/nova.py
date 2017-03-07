@@ -122,8 +122,10 @@ class OpenStackExtractor(base.BaseExtractor):
             user_name = users[server.user_id]
             ifaces = server.interface_list()
             secgroups = server.list_security_group()
-            LOG.debug('>>>> Interfaces: ', ifaces)
-            LOG.debug('>>>> Sec Groups: ', secgroups)
+            networks = server.networks
+            LOG.debug(ifaces)
+            LOG.debug(secgroups)
+            LOG.debug(networks)
             (b_name, b_value) = self._get_bench(nova, server)
             r = record.CloudRecord(server.id,
                                    CONF.site_name,
