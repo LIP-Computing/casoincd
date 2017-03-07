@@ -161,6 +161,8 @@ class CloudRecord(object):
              'Benchmark': self.benchmark_value,
              'BenchmarkType': self.benchmark_type,
              'CloudComputeService': self.compute_service,
+             'UserName': self.user_name,
+             'ProjectName': self.project_name,
              }
         return d
 
