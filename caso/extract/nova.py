@@ -94,7 +94,6 @@ class OpenStackExtractor(base.BaseExtractor):
         servers = nova.servers.list(search_opts={"changes-since": lastrun})
 
         servers = sorted(servers, key=operator.attrgetter("created"))
-        LOG.debug(users)
 
         if servers:
             start = dateutil.parser.parse(servers[0].created)
@@ -120,7 +119,8 @@ class OpenStackExtractor(base.BaseExtractor):
                     if image.get("vmcatcher_event_ad_mpuri", None) is not None:
                         image_id = image.get("vmcatcher_event_ad_mpuri", None)
 
-            #user_name = users[server.user_id]
+            user_name = users[server.user_id]
+            LOG.debug(user_name)
             (b_name, b_value) = self._get_bench(nova, server)
             r = record.CloudRecord(server.id,
                                    CONF.site_name,
@@ -134,6 +134,7 @@ class OpenStackExtractor(base.BaseExtractor):
                                    user_dn=users.get(server.user_id, None),
                                    benchmark_type=b_name,
                                    benchmark_value=b_value,
+                                   user_name=user_name,
                                    project_name=project)
             records[server.id] = r
 
