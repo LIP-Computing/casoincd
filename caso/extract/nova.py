@@ -94,6 +94,8 @@ class OpenStackExtractor(base.BaseExtractor):
         servers = nova.servers.list(search_opts={"changes-since": lastrun})
 
         servers = sorted(servers, key=operator.attrgetter("created"))
+        for user in users:
+            LOG.debug(user)
 
         if servers:
             start = dateutil.parser.parse(servers[0].created)
@@ -131,7 +133,8 @@ class OpenStackExtractor(base.BaseExtractor):
                                    image_id=image_id,
                                    user_dn=users.get(server.user_id, None),
                                    benchmark_type=b_name,
-                                   benchmark_value=b_value)
+                                   benchmark_value=b_value,
+                                   project_name=project)
             records[server.id] = r
 
         for usage in usages:

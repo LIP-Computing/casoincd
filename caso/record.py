@@ -61,6 +61,8 @@ class CloudRecord(object):
         "BenchmarkType",
         "Benchmark",
         "PublicIPCount",
+        "UserName",
+        "ProjectName",
     ]
 
     _version_field_map = {
@@ -80,7 +82,7 @@ class CloudRecord(object):
                  user_dn=None,
                  compute_service=None,
                  benchmark_value=None, benchmark_type=None,
-                 public_ip_count=None):
+                 public_ip_count=None, user_name=None, project_name=None):
 
         self.uuid = uuid
         self.site = site
@@ -108,6 +110,8 @@ class CloudRecord(object):
         self.benchmark_value = benchmark_value
         self.benchmark_type = benchmark_type
         self.public_ip_count = public_ip_count
+        self.user_name = user_name
+        self.project_name = project_name
 
     def __repr__(self):
         return pprint.pformat(self.as_dict())
